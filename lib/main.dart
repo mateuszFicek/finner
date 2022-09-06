@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 
 import 'styles/theme_utils.dart';
+import 'utils/injectable.dart';
+import 'utils/router.dart';
 
 void main() {
-  runApp(const MyApp());
+  configureDependencies();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  final _appRouter = getIt<FinnerRouter>();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Finner app',
+      debugShowCheckedModeBanner: false,
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
       theme: $styles.colors.toThemeData(),
-      home: DefaultTextStyle(
-        style: $styles.text.body,
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Finner"),
-          ),
-        ),
-      ),
     );
   }
 }

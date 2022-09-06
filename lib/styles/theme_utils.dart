@@ -1,3 +1,4 @@
+// ignore_for_file: library_private_types_in_public_api
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
@@ -6,21 +7,11 @@ final $styles = AppStyle();
 
 @immutable
 class AppStyle {
-  /// The current theme colors for the app
   final AppColors colors = AppColors();
-
-  /// Rounded edge corner radii
   late final _Corners corners = _Corners();
-
   late final _Shadows shadows = _Shadows();
-
-  /// Padding and margin values
   late final _Insets insets = _Insets();
-
-  /// Text styles
   late final _Text text = _Text();
-
-  /// Animation Durations
   final _Times times = _Times();
 }
 
