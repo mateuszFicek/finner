@@ -16,7 +16,7 @@ class AppColors {
   final bool isDark = false;
 
   ThemeData toThemeData() {
-    TextTheme txtTheme = GoogleFonts.senTextTheme();
+    TextTheme txtTheme = GoogleFonts.syneTextTheme();
     Color txtColor = white;
     ColorScheme colorScheme = ColorScheme(
         brightness: isDark ? Brightness.dark : Brightness.light,
