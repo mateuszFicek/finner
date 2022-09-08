@@ -11,8 +11,11 @@ environment:
 dependencies:
   auto_route: ^5.0.1
   cupertino_icons: ^1.0.2
+  dots_indicator: ^2.1.0
   flutter:
     sdk: flutter
+  flutter_hooks: ^0.18.5+1
+  font_awesome_flutter: ^10.1.0
   get_it: ^7.2.0
   google_fonts: ^3.0.1
   injectable: ^1.5.3

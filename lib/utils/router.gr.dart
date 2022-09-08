@@ -21,12 +21,18 @@ class _$FinnerRouter extends RootStackRouter {
     IntroductionRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const IntroductionPage());
+    },
+    WalkthroughRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const WalkthroughPage());
     }
   };
 
   @override
-  List<RouteConfig> get routes =>
-      [RouteConfig(IntroductionRoute.name, path: '/')];
+  List<RouteConfig> get routes => [
+        RouteConfig(IntroductionRoute.name, path: '/'),
+        RouteConfig(WalkthroughRoute.name, path: '/walkthrough-page')
+      ];
 }
 
 /// generated route for
@@ -35,4 +41,13 @@ class IntroductionRoute extends PageRouteInfo<void> {
   const IntroductionRoute() : super(IntroductionRoute.name, path: '/');
 
   static const String name = 'IntroductionRoute';
+}
+
+/// generated route for
+/// [WalkthroughPage]
+class WalkthroughRoute extends PageRouteInfo<void> {
+  const WalkthroughRoute()
+      : super(WalkthroughRoute.name, path: '/walkthrough-page');
+
+  static const String name = 'WalkthroughRoute';
 }

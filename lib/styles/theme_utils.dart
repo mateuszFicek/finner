@@ -19,6 +19,7 @@ class AppStyle {
 class _Text {
   final TextStyle titleFont = TextStyle(color: $styles.colors.black);
   final TextStyle contentFont = TextStyle(color: $styles.colors.black);
+  final TextStyle buttonFont = TextStyle(color: $styles.colors.white);
 
   late final TextStyle h1 = copy(titleFont, sizePx: 64, heightPx: 62);
   late final TextStyle h2 = copy(titleFont, sizePx: 32, heightPx: 46);
@@ -38,7 +39,7 @@ class _Text {
   late final TextStyle bodySmallBold =
       copy(contentFont, sizePx: 14, heightPx: 23, weight: FontWeight.w600);
   late final TextStyle btn =
-      copy(titleFont, sizePx: 12, weight: FontWeight.w600, heightPx: 13.2);
+      copy(buttonFont, weight: FontWeight.w400, sizePx: 18, heightPx: 46);
 
   TextStyle copy(TextStyle style,
       {required double sizePx,

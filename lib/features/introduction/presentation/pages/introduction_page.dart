@@ -1,4 +1,7 @@
+import 'package:finner/features/introduction/presentation/pages/walkthrough_page.dart';
 import 'package:finner/styles/theme_utils.dart';
+import 'package:finner/utils/injectable.dart';
+import 'package:finner/utils/router.dart';
 import 'package:flutter/material.dart';
 
 class IntroductionPage extends StatefulWidget {
@@ -99,7 +102,9 @@ class _IntroductionPageState extends State<IntroductionPage> {
         borderRadius: BorderRadius.circular(64),
         child: InkWell(
           borderRadius: BorderRadius.circular(64),
-          onTap: () {},
+          onTap: () {
+            getIt<FinnerRouter>().push(const WalkthroughRoute());
+          },
           child: Container(
             width: 64,
             height: 64,
