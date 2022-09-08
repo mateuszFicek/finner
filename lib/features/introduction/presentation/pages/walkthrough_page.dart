@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../utils/injectable.dart';
+import '../../../../utils/router.dart';
+
 class WalkthroughPage extends HookWidget {
   const WalkthroughPage({super.key});
 
@@ -28,7 +31,11 @@ class WalkthroughPage extends HookWidget {
         _pageView(pageController),
         _dotsIndicator(p),
         SizedBox(height: $styles.insets.sm),
-        CustomButton(onTap: () {}, title: "Get Started"),
+        CustomButton(
+            onTap: () {
+              getIt<FinnerRouter>().replace(const SignInRoute());
+            },
+            title: "Get Started"),
       ],
     );
   }

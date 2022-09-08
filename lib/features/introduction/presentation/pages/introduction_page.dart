@@ -103,7 +103,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
         child: InkWell(
           borderRadius: BorderRadius.circular(64),
           onTap: () {
-            getIt<FinnerRouter>().push(const WalkthroughRoute());
+            getIt<FinnerRouter>().replace(const WalkthroughRoute());
           },
           child: Container(
             width: 64,
