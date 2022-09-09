@@ -1,4 +1,3 @@
-import 'package:finner/features/introduction/presentation/pages/walkthrough_page.dart';
 import 'package:finner/styles/theme_utils.dart';
 import 'package:finner/utils/injectable.dart';
 import 'package:finner/utils/router.dart';
