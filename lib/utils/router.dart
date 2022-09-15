@@ -5,6 +5,8 @@ import 'package:finner/features/introduction/presentation/pages/walkthrough_page
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
+import '../features/home/presentation/pages/home_page.dart';
+
 part 'router.gr.dart';
 
 @MaterialAutoRouter(
@@ -13,6 +15,7 @@ part 'router.gr.dart';
     AutoRoute(page: IntroductionPage, initial: true),
     AutoRoute(page: WalkthroughPage),
     AutoRoute(page: SignInPage),
+    AutoRoute(page: HomePage),
   ],
 )
 @singleton

@@ -29,6 +29,10 @@ class _$FinnerRouter extends RootStackRouter {
     SignInRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const SignInPage());
+    },
+    HomeRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const HomePage());
     }
   };
 
@@ -36,7 +40,8 @@ class _$FinnerRouter extends RootStackRouter {
   List<RouteConfig> get routes => [
         RouteConfig(IntroductionRoute.name, path: '/'),
         RouteConfig(WalkthroughRoute.name, path: '/walkthrough-page'),
-        RouteConfig(SignInRoute.name, path: '/sign-in-page')
+        RouteConfig(SignInRoute.name, path: '/sign-in-page'),
+        RouteConfig(HomeRoute.name, path: '/home-page')
       ];
 }
 
@@ -63,4 +68,12 @@ class SignInRoute extends PageRouteInfo<void> {
   const SignInRoute() : super(SignInRoute.name, path: '/sign-in-page');
 
   static const String name = 'SignInRoute';
+}
+
+/// generated route for
+/// [HomePage]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute() : super(HomeRoute.name, path: '/home-page');
+
+  static const String name = 'HomeRoute';
 }

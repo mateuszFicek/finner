@@ -1,11 +1,16 @@
 import 'package:finner/common/widgets/custom_button.dart';
+import 'package:finner/features/account/presentation/bloc/bloc/account_bloc.dart';
 import 'package:finner/styles/theme_utils.dart';
+import 'package:finner/utils/injectable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../common/widgets/dimmed_loading_indicator.dart';
 import '../../../../common/widgets/text_button.dart';
 
-class SignInPage extends StatefulWidget {
+class SignInPage extends StatefulHookWidget {
   const SignInPage({super.key});
 
   @override
@@ -15,6 +20,8 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   bool isSignUp = false;
   bool showSignUp = false;
+
+  final _bloc = getIt<AccountBloc>();
 
   void animateToSignUp() {
     Future.delayed($styles.times.fast, () {
@@ -34,12 +41,48 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
+    final passwordController = useTextEditingController(text: "");
+    final emailController = useTextEditingController(text: "");
     return Scaffold(
-      body: _body(context),
+      body: BlocListener<AccountBloc, AccountState>(
+        bloc: _bloc,
+        listener: (context, state) {
+          state.maybeWhen(
+            signedIn: () {
+              // getIt<FinnerRouter>().replace(const HomeRoute());
+            },
+            accountCreated: () {},
+            orElse: () {},
+          );
+        },
+        child: BlocBuilder<AccountBloc, AccountState>(
+          bloc: _bloc,
+          builder: (context, state) {
+            return state.maybeWhen<Widget>(
+              accountInformationLoading: () =>
+                  _loadingBody(context, emailController, passwordController),
+              orElse: () => _body(context, emailController, passwordController),
+            );
+          },
+        ),
+      ),
     );
   }
 
-  Widget _body(BuildContext context) {
+  Widget _loadingBody(
+      BuildContext context,
+      TextEditingController emailController,
+      TextEditingController passwordController) {
+    return Stack(
+      children: [
+        _body(context, emailController, passwordController),
+        const DimmedLoadingIndicator(),
+      ],
+    );
+  }
+
+  Widget _body(BuildContext context, TextEditingController emailController,
+      TextEditingController passwordController) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -50,16 +93,20 @@ class _SignInPageState extends State<SignInPage> {
         SizedBox(
           height: $styles.insets.sm,
         ),
-        _emailTextField("example@gmail.com", false,
-            keyboardType: TextInputType.emailAddress),
+        _emailTextField(
+          "example@gmail.com",
+          false,
+          emailController,
+          keyboardType: TextInputType.emailAddress,
+        ),
         SizedBox(
           height: $styles.insets.sm,
         ),
-        _emailTextField("Password", true),
+        _emailTextField("Password", true, passwordController),
         SizedBox(
           height: $styles.insets.sm,
         ),
-        _signUpButton(),
+        _signUpButton(emailController.text, passwordController.text),
         SizedBox(
           height: MediaQuery.of(context).padding.bottom + $styles.insets.sm,
         ),
@@ -183,11 +230,16 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  Widget _emailTextField(String hint, bool hidden,
-      {TextInputType keyboardType = TextInputType.text}) {
+  Widget _emailTextField(
+    String hint,
+    bool hidden,
+    TextEditingController controller, {
+    TextInputType keyboardType = TextInputType.text,
+  }) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
       child: TextField(
+        controller: controller,
         obscureText: hidden,
         keyboardType: keyboardType,
         decoration: InputDecoration(
@@ -199,12 +251,18 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  Widget _signUpButton() {
+  Widget _signUpButton(String email, String password) {
     return Row(
       children: [
         Expanded(
           child: CustomButton(
-            onTap: () {},
+            onTap: () {
+              if (isSignUp) {
+                _bloc.add(AccountEvent.signUp(email, password));
+              } else {
+                _bloc.add(AccountEvent.signIn(email, password));
+              }
+            },
             title: isSignUp ? "Sign Up" : "Sign In",
           ),
         ),
