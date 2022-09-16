@@ -1,5 +1,5 @@
 import 'package:finner/common/widgets/custom_button.dart';
-import 'package:finner/features/account/presentation/bloc/bloc/account_bloc.dart';
+import 'package:finner/features/account/presentation/bloc/account_bloc.dart';
 import 'package:finner/styles/theme_utils.dart';
 import 'package:finner/utils/injectable.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../common/widgets/custom_snack_bar.dart';
+import '../../../../common/widgets/custom_text_field.dart';
 import '../../../../common/widgets/dimmed_loading_indicator.dart';
 import '../../../../common/widgets/text_button.dart';
+import '../../../../utils/router.dart';
 
 class SignInPage extends StatefulHookWidget {
   const SignInPage({super.key});
@@ -49,9 +52,15 @@ class _SignInPageState extends State<SignInPage> {
         listener: (context, state) {
           state.maybeWhen(
             signedIn: () {
-              // getIt<FinnerRouter>().replace(const HomeRoute());
+              getIt<FinnerRouter>().replace(const HomeRoute());
             },
-            accountCreated: () {},
+            accountCreated: () {
+              // TODO: add account creation
+              getIt<FinnerRouter>().replace(const HomeRoute());
+            },
+            accountError: (message) {
+              CustomSnackBar.show(message, context);
+            },
             orElse: () {},
           );
         },
@@ -59,8 +68,11 @@ class _SignInPageState extends State<SignInPage> {
           bloc: _bloc,
           builder: (context, state) {
             return state.maybeWhen<Widget>(
-              accountInformationLoading: () =>
-                  _loadingBody(context, emailController, passwordController),
+              accountInformationLoading: () => _loadingBody(
+                context,
+                emailController,
+                passwordController,
+              ),
               orElse: () => _body(context, emailController, passwordController),
             );
           },
@@ -93,7 +105,7 @@ class _SignInPageState extends State<SignInPage> {
         SizedBox(
           height: $styles.insets.sm,
         ),
-        _emailTextField(
+        _textField(
           "example@gmail.com",
           false,
           emailController,
@@ -102,7 +114,7 @@ class _SignInPageState extends State<SignInPage> {
         SizedBox(
           height: $styles.insets.sm,
         ),
-        _emailTextField("Password", true, passwordController),
+        _textField("Password", true, passwordController),
         SizedBox(
           height: $styles.insets.sm,
         ),
@@ -230,24 +242,17 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  Widget _emailTextField(
+  Widget _textField(
     String hint,
     bool hidden,
     TextEditingController controller, {
     TextInputType keyboardType = TextInputType.text,
   }) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
-      child: TextField(
-        controller: controller,
-        obscureText: hidden,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          hintText: hint,
-          border: const OutlineInputBorder(),
-          enabledBorder: const OutlineInputBorder(),
-        ),
-      ),
+    return CustomTextField(
+      controller: controller,
+      hidden: hidden,
+      hint: hint,
+      keyboardType: keyboardType,
     );
   }
 
@@ -275,7 +280,9 @@ class _SignInPageState extends State<SignInPage> {
 
   Widget _alternativeSignUpButtons() {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        _bloc.add(const AccountEvent.authorizeWithGoogle());
+      },
       borderRadius: BorderRadius.circular($styles.corners.md),
       highlightColor: $styles.colors.accent3,
       child: Container(

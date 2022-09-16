@@ -8,10 +8,11 @@ import 'utils/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  configureDependencies();
+
   runApp(MyApp());
 }
 
