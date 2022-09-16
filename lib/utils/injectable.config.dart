@@ -10,7 +10,7 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
 import '../app_modules/api_module.dart' as _i19;
-import '../app_modules/app_settings_cubit/app_settings_cubit.dart' as _i3;
+import '../app_modules/configuration/app_settings_cubit.dart' as _i3;
 import '../common/template/data/data_sources/default_template_data_source.dart'
     as _i7;
 import '../common/template/data/repositories/default_template_repository.dart'

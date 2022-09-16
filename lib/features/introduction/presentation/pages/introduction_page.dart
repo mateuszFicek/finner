@@ -2,9 +2,8 @@ import 'package:finner/styles/theme_utils.dart';
 import 'package:finner/utils/injectable.dart';
 import 'package:finner/utils/router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../app_modules/app_settings_cubit/app_settings_cubit.dart';
+import '../../../../app_modules/configuration/app_settings_cubit.dart';
 
 class IntroductionPage extends StatefulWidget {
   const IntroductionPage({super.key});
