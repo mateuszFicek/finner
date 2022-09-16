@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:finner/features/account/domain/use_cases/create_user.dart';
 import 'package:finner/features/account/domain/use_cases/login_user.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 

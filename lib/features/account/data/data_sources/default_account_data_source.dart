@@ -1,12 +1,10 @@
 // Package imports:
 import 'package:dartz/dartz.dart';
-import 'package:finner/features/account/domain/use_cases/create_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
 // Project imports:
 import '../../../../utils/failure.dart';
-import '../../../../utils/network.dart';
 import '../../domain/data_sources/account_data_source.dart';
 
 // Project imports:
