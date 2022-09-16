@@ -1,8 +1,9 @@
-import 'package:finner/features/introduction/presentation/pages/walkthrough_page.dart';
 import 'package:finner/styles/theme_utils.dart';
 import 'package:finner/utils/injectable.dart';
 import 'package:finner/utils/router.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../app_modules/configuration/app_settings_cubit.dart';
 
 class IntroductionPage extends StatefulWidget {
   const IntroductionPage({super.key});
@@ -15,10 +16,15 @@ class _IntroductionPageState extends State<IntroductionPage> {
   bool firstStepFinished = false;
   bool animationsFinished = false;
   List<bool> featureAnimations = List.generate(4, (index) => false);
+  final _bloc = getIt<AppSettingsCubit>();
 
   @override
   void initState() {
     super.initState();
+    if (_bloc.state is DisplayedIntroductionState) {
+      getIt<FinnerRouter>().replace(const SignInRoute());
+      return;
+    }
     Future.delayed($styles.times.med, () {
       setState(() {
         firstStepFinished = true;
@@ -35,10 +41,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: $styles.colors.accent2,
-      body: _body(),
-    );
+    return Scaffold(backgroundColor: $styles.colors.accent2, body: _body());
   }
 
   Widget _body() {
@@ -103,7 +106,8 @@ class _IntroductionPageState extends State<IntroductionPage> {
         child: InkWell(
           borderRadius: BorderRadius.circular(64),
           onTap: () {
-            getIt<FinnerRouter>().push(const WalkthroughRoute());
+            _bloc.setIntroductionAsDisplayed();
+            getIt<FinnerRouter>().replace(const WalkthroughRoute());
           },
           child: Container(
             width: 64,

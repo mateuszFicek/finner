@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "845351026928",
+    "project_id": "finner-9c385",
+    "storage_bucket": "finner-9c385.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845351026928:android:8006c4dbeb47db33e30235",
+        "android_client_info": {
+          "package_name": "com.mateuszficek.finner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "845351026928-oev0jqc2d7d2hdt6megn71e0ubp8rh7s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg41aB70T_HRaWIglwzf1-MGOFpL0AHLk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "845351026928-oev0jqc2d7d2hdt6megn71e0ubp8rh7s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
