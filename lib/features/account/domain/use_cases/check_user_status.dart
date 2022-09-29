@@ -8,11 +8,10 @@ import '../../../../utils/failure.dart';
 import '../repositories/account_repository.dart';
 
 @injectable
-class LoginUser {
-  final AccountRepository accountRepository;
+class CheckUserStatus {
+  final AccountRepository groupRepository;
 
-  LoginUser(this.accountRepository);
+  CheckUserStatus(this.groupRepository);
 
-  Future<Either<Failure, User?>> call(String email, String password) =>
-      accountRepository.loginUser(email, password);
+  Future<Either<Failure, User?>> call() => groupRepository.checkUserStatus();
 }

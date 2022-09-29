@@ -4,6 +4,7 @@ import 'package:finner/utils/router.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app_modules/configuration/app_settings_cubit.dart';
+import '../../widgets/loading_screen.dart';
 
 class IntroductionPage extends StatefulWidget {
   const IntroductionPage({super.key});
@@ -21,10 +22,6 @@ class _IntroductionPageState extends State<IntroductionPage> {
   @override
   void initState() {
     super.initState();
-    if (_bloc.state is DisplayedIntroductionState) {
-      getIt<FinnerRouter>().replace(const SignInRoute());
-      return;
-    }
     Future.delayed($styles.times.med, () {
       setState(() {
         firstStepFinished = true;
@@ -41,6 +38,9 @@ class _IntroductionPageState extends State<IntroductionPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (_bloc.state is DisplayedIntroductionState) {
+      return const LoadingScreen();
+    }
     return Scaffold(backgroundColor: $styles.colors.accent2, body: _body());
   }
 
