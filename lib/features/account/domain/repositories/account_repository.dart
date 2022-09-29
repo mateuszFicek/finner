@@ -17,4 +17,5 @@ abstract class AccountRepository {
   );
 
   Future<Either<Failure, User?>> authorizeWithGoogle();
+  Future<Either<Failure, User?>> checkUserStatus();
 }

@@ -54,4 +54,14 @@ class DefaultAccountDataSource implements AccountDataSource {
       return left(const Failure("Couldn't sign in with Google."));
     }
   }
+
+  @override
+  Future<Either<Failure, User?>> checkUserStatus() async {
+    try {
+      final user = auth.currentUser;
+      return right(user);
+    } catch (e) {
+      return left(const Failure("Something went wrong."));
+    }
+  }
 }

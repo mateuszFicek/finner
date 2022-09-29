@@ -21,6 +21,7 @@ mixin _$AccountEvent {
     required TResult Function(String email, String password) signIn,
     required TResult Function(String email, String password) signUp,
     required TResult Function() authorizeWithGoogle,
+    required TResult Function() checkUserStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$AccountEvent {
     TResult Function(String email, String password)? signIn,
     TResult Function(String email, String password)? signUp,
     TResult Function()? authorizeWithGoogle,
+    TResult Function()? checkUserStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$AccountEvent {
     TResult Function(String email, String password)? signIn,
     TResult Function(String email, String password)? signUp,
     TResult Function()? authorizeWithGoogle,
+    TResult Function()? checkUserStatus,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$AccountEvent {
     required TResult Function(_SignIn value) signIn,
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_AuthorizeWithGoogle value) authorizeWithGoogle,
+    required TResult Function(_CheckUserStatus value) checkUserStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$AccountEvent {
     TResult Function(_SignIn value)? signIn,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_AuthorizeWithGoogle value)? authorizeWithGoogle,
+    TResult Function(_CheckUserStatus value)? checkUserStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$AccountEvent {
     TResult Function(_SignIn value)? signIn,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_AuthorizeWithGoogle value)? authorizeWithGoogle,
+    TResult Function(_CheckUserStatus value)? checkUserStatus,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -153,6 +159,7 @@ class _$_SignIn implements _SignIn {
     required TResult Function(String email, String password) signIn,
     required TResult Function(String email, String password) signUp,
     required TResult Function() authorizeWithGoogle,
+    required TResult Function() checkUserStatus,
   }) {
     return signIn(email, password);
   }
@@ -163,6 +170,7 @@ class _$_SignIn implements _SignIn {
     TResult Function(String email, String password)? signIn,
     TResult Function(String email, String password)? signUp,
     TResult Function()? authorizeWithGoogle,
+    TResult Function()? checkUserStatus,
   }) {
     return signIn?.call(email, password);
   }
@@ -173,6 +181,7 @@ class _$_SignIn implements _SignIn {
     TResult Function(String email, String password)? signIn,
     TResult Function(String email, String password)? signUp,
     TResult Function()? authorizeWithGoogle,
+    TResult Function()? checkUserStatus,
     required TResult orElse(),
   }) {
     if (signIn != null) {
@@ -187,6 +196,7 @@ class _$_SignIn implements _SignIn {
     required TResult Function(_SignIn value) signIn,
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_AuthorizeWithGoogle value) authorizeWithGoogle,
+    required TResult Function(_CheckUserStatus value) checkUserStatus,
   }) {
     return signIn(this);
   }
@@ -197,6 +207,7 @@ class _$_SignIn implements _SignIn {
     TResult Function(_SignIn value)? signIn,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_AuthorizeWithGoogle value)? authorizeWithGoogle,
+    TResult Function(_CheckUserStatus value)? checkUserStatus,
   }) {
     return signIn?.call(this);
   }
@@ -207,6 +218,7 @@ class _$_SignIn implements _SignIn {
     TResult Function(_SignIn value)? signIn,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_AuthorizeWithGoogle value)? authorizeWithGoogle,
+    TResult Function(_CheckUserStatus value)? checkUserStatus,
     required TResult orElse(),
   }) {
     if (signIn != null) {
@@ -301,6 +313,7 @@ class _$_SignUp implements _SignUp {
     required TResult Function(String email, String password) signIn,
     required TResult Function(String email, String password) signUp,
     required TResult Function() authorizeWithGoogle,
+    required TResult Function() checkUserStatus,
   }) {
     return signUp(email, password);
   }
@@ -311,6 +324,7 @@ class _$_SignUp implements _SignUp {
     TResult Function(String email, String password)? signIn,
     TResult Function(String email, String password)? signUp,
     TResult Function()? authorizeWithGoogle,
+    TResult Function()? checkUserStatus,
   }) {
     return signUp?.call(email, password);
   }
@@ -321,6 +335,7 @@ class _$_SignUp implements _SignUp {
     TResult Function(String email, String password)? signIn,
     TResult Function(String email, String password)? signUp,
     TResult Function()? authorizeWithGoogle,
+    TResult Function()? checkUserStatus,
     required TResult orElse(),
   }) {
     if (signUp != null) {
@@ -335,6 +350,7 @@ class _$_SignUp implements _SignUp {
     required TResult Function(_SignIn value) signIn,
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_AuthorizeWithGoogle value) authorizeWithGoogle,
+    required TResult Function(_CheckUserStatus value) checkUserStatus,
   }) {
     return signUp(this);
   }
@@ -345,6 +361,7 @@ class _$_SignUp implements _SignUp {
     TResult Function(_SignIn value)? signIn,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_AuthorizeWithGoogle value)? authorizeWithGoogle,
+    TResult Function(_CheckUserStatus value)? checkUserStatus,
   }) {
     return signUp?.call(this);
   }
@@ -355,6 +372,7 @@ class _$_SignUp implements _SignUp {
     TResult Function(_SignIn value)? signIn,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_AuthorizeWithGoogle value)? authorizeWithGoogle,
+    TResult Function(_CheckUserStatus value)? checkUserStatus,
     required TResult orElse(),
   }) {
     if (signUp != null) {
@@ -418,6 +436,7 @@ class _$_AuthorizeWithGoogle implements _AuthorizeWithGoogle {
     required TResult Function(String email, String password) signIn,
     required TResult Function(String email, String password) signUp,
     required TResult Function() authorizeWithGoogle,
+    required TResult Function() checkUserStatus,
   }) {
     return authorizeWithGoogle();
   }
@@ -428,6 +447,7 @@ class _$_AuthorizeWithGoogle implements _AuthorizeWithGoogle {
     TResult Function(String email, String password)? signIn,
     TResult Function(String email, String password)? signUp,
     TResult Function()? authorizeWithGoogle,
+    TResult Function()? checkUserStatus,
   }) {
     return authorizeWithGoogle?.call();
   }
@@ -438,6 +458,7 @@ class _$_AuthorizeWithGoogle implements _AuthorizeWithGoogle {
     TResult Function(String email, String password)? signIn,
     TResult Function(String email, String password)? signUp,
     TResult Function()? authorizeWithGoogle,
+    TResult Function()? checkUserStatus,
     required TResult orElse(),
   }) {
     if (authorizeWithGoogle != null) {
@@ -452,6 +473,7 @@ class _$_AuthorizeWithGoogle implements _AuthorizeWithGoogle {
     required TResult Function(_SignIn value) signIn,
     required TResult Function(_SignUp value) signUp,
     required TResult Function(_AuthorizeWithGoogle value) authorizeWithGoogle,
+    required TResult Function(_CheckUserStatus value) checkUserStatus,
   }) {
     return authorizeWithGoogle(this);
   }
@@ -462,6 +484,7 @@ class _$_AuthorizeWithGoogle implements _AuthorizeWithGoogle {
     TResult Function(_SignIn value)? signIn,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_AuthorizeWithGoogle value)? authorizeWithGoogle,
+    TResult Function(_CheckUserStatus value)? checkUserStatus,
   }) {
     return authorizeWithGoogle?.call(this);
   }
@@ -472,6 +495,7 @@ class _$_AuthorizeWithGoogle implements _AuthorizeWithGoogle {
     TResult Function(_SignIn value)? signIn,
     TResult Function(_SignUp value)? signUp,
     TResult Function(_AuthorizeWithGoogle value)? authorizeWithGoogle,
+    TResult Function(_CheckUserStatus value)? checkUserStatus,
     required TResult orElse(),
   }) {
     if (authorizeWithGoogle != null) {
@@ -483,6 +507,123 @@ class _$_AuthorizeWithGoogle implements _AuthorizeWithGoogle {
 
 abstract class _AuthorizeWithGoogle implements AccountEvent {
   const factory _AuthorizeWithGoogle() = _$_AuthorizeWithGoogle;
+}
+
+/// @nodoc
+abstract class _$$_CheckUserStatusCopyWith<$Res> {
+  factory _$$_CheckUserStatusCopyWith(
+          _$_CheckUserStatus value, $Res Function(_$_CheckUserStatus) then) =
+      __$$_CheckUserStatusCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_CheckUserStatusCopyWithImpl<$Res>
+    extends _$AccountEventCopyWithImpl<$Res>
+    implements _$$_CheckUserStatusCopyWith<$Res> {
+  __$$_CheckUserStatusCopyWithImpl(
+      _$_CheckUserStatus _value, $Res Function(_$_CheckUserStatus) _then)
+      : super(_value, (v) => _then(v as _$_CheckUserStatus));
+
+  @override
+  _$_CheckUserStatus get _value => super._value as _$_CheckUserStatus;
+}
+
+/// @nodoc
+
+class _$_CheckUserStatus implements _CheckUserStatus {
+  const _$_CheckUserStatus();
+
+  @override
+  String toString() {
+    return 'AccountEvent.checkUserStatus()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_CheckUserStatus);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) signIn,
+    required TResult Function(String email, String password) signUp,
+    required TResult Function() authorizeWithGoogle,
+    required TResult Function() checkUserStatus,
+  }) {
+    return checkUserStatus();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String email, String password)? signIn,
+    TResult Function(String email, String password)? signUp,
+    TResult Function()? authorizeWithGoogle,
+    TResult Function()? checkUserStatus,
+  }) {
+    return checkUserStatus?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? signIn,
+    TResult Function(String email, String password)? signUp,
+    TResult Function()? authorizeWithGoogle,
+    TResult Function()? checkUserStatus,
+    required TResult orElse(),
+  }) {
+    if (checkUserStatus != null) {
+      return checkUserStatus();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SignIn value) signIn,
+    required TResult Function(_SignUp value) signUp,
+    required TResult Function(_AuthorizeWithGoogle value) authorizeWithGoogle,
+    required TResult Function(_CheckUserStatus value) checkUserStatus,
+  }) {
+    return checkUserStatus(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_SignIn value)? signIn,
+    TResult Function(_SignUp value)? signUp,
+    TResult Function(_AuthorizeWithGoogle value)? authorizeWithGoogle,
+    TResult Function(_CheckUserStatus value)? checkUserStatus,
+  }) {
+    return checkUserStatus?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SignIn value)? signIn,
+    TResult Function(_SignUp value)? signUp,
+    TResult Function(_AuthorizeWithGoogle value)? authorizeWithGoogle,
+    TResult Function(_CheckUserStatus value)? checkUserStatus,
+    required TResult orElse(),
+  }) {
+    if (checkUserStatus != null) {
+      return checkUserStatus(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CheckUserStatus implements AccountEvent {
+  const factory _CheckUserStatus() = _$_CheckUserStatus;
 }
 
 /// @nodoc

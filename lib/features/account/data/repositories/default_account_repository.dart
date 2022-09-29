@@ -25,4 +25,8 @@ class DefaultAccountRepository implements AccountRepository {
   @override
   Future<Either<Failure, User?>> authorizeWithGoogle() =>
       _dataSource.authorizeWithGoogle();
+
+  @override
+  Future<Either<Failure, User?>> checkUserStatus() =>
+      _dataSource.checkUserStatus();
 }
