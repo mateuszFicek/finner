@@ -113,6 +113,8 @@ app.*.symbols
 
 # Built Value generated files
 *.g.dart
+*.freezed.dart
+*.config.dart
 
 # Chopper generated files
 *.chopper.dart
