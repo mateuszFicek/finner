@@ -10,6 +10,13 @@ class AppColors {
   final Color body = const Color(0xFF514F4D);
   final Color greyStrong = const Color.fromARGB(243, 37, 37, 39);
   final Color greyMedium = const Color(0xFFA9AABC);
+  final Color greyBackground = const Color(0xFFecedef);
+
+  final Color redSpending = Colors.red.withOpacity(0.15);
+  final Color blueSpending = Colors.blue.withOpacity(0.15);
+  final Color orangeSpending = Colors.orange.withOpacity(0.15);
+  final Color greenSpending = Colors.green.withOpacity(0.15);
+
   final Color white = const Color(0xFFF5F5F5);
   final Color black = const Color(0xFF1E1B18);
 

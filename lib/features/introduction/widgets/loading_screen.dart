@@ -33,7 +33,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         listener: (context, state) {
           state.maybeWhen(
             signedIn: () {
-              getIt<FinnerRouter>().replace(const HomeRoute());
+              getIt<FinnerRouter>().replace(const HomeViewRoute());
             },
             accountError: (e) {
               getIt<FinnerRouter>().replace(const SignInRoute());
