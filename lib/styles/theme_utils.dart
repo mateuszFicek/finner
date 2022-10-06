@@ -36,6 +36,8 @@ class _Text {
   late final TextStyle bodyBold =
       copy(contentFont, sizePx: 16, heightPx: 26, weight: FontWeight.w600);
   late final TextStyle bodySmall = copy(contentFont, sizePx: 14, heightPx: 23);
+  late final TextStyle bodyExtraSmall =
+      copy(contentFont, sizePx: 12, heightPx: 18);
   late final TextStyle bodySmallBold =
       copy(contentFont, sizePx: 14, heightPx: 23, weight: FontWeight.w600);
   late final TextStyle btn =
@@ -80,6 +82,8 @@ class _Insets {
   late final double xl = 48;
   late final double xxl = 56;
   late final double offset = 80;
+  late final double big = 85;
+  late final double large = 120;
 }
 
 @immutable

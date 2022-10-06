@@ -8,17 +8,19 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     this.hidden = false,
     this.hint = "",
+    this.padded = true,
     this.keyboardType = TextInputType.text,
   }) : super(key: key);
 
   final String hint;
   final bool hidden;
+  final bool padded;
   final TextEditingController controller;
   final TextInputType keyboardType;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
+      padding: EdgeInsets.symmetric(horizontal: padded ? $styles.insets.sm : 0),
       child: TextField(
         controller: controller,
         obscureText: hidden,

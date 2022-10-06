@@ -1,4 +1,3 @@
-import 'package:finner/common/widgets/dimmed_loading_indicator.dart';
 import 'package:finner/styles/theme_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +32,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         listener: (context, state) {
           state.maybeWhen(
             signedIn: () {
-              getIt<FinnerRouter>().replace(const HomeRoute());
+              getIt<FinnerRouter>().replace(const HomeViewRoute());
             },
             accountError: (e) {
               getIt<FinnerRouter>().replace(const SignInRoute());

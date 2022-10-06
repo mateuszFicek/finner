@@ -52,11 +52,11 @@ class _SignInPageState extends State<SignInPage> {
         listener: (context, state) {
           state.maybeWhen(
             signedIn: () {
-              getIt<FinnerRouter>().replace(const HomeRoute());
+              getIt<FinnerRouter>().replace(const HomeViewRoute());
             },
             accountCreated: () {
               // TODO: add account creation
-              getIt<FinnerRouter>().replace(const HomeRoute());
+              getIt<FinnerRouter>().replace(const HomeViewRoute());
             },
             accountError: (message) {
               CustomSnackBar.show(message, context);
