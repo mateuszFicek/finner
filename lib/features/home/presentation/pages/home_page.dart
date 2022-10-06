@@ -1,4 +1,5 @@
 import 'package:finner/common/widgets/bar_chart.dart';
+import 'package:finner/common/widgets/dimmed_loading_indicator.dart';
 import 'package:finner/features/home/domain/entities/home_page_view_model.dart';
 import 'package:finner/styles/theme_utils.dart';
 import 'package:finner/utils/injectable.dart';
@@ -29,12 +30,18 @@ class HomePage extends HookWidget {
               loaded: (_) {
                 refreshController.twoLevelComplete();
               },
+              loading: (e) {},
               orElse: () {});
         },
         builder: (context, state) {
           return state.maybeWhen(
-            loaded: (e) => _firstPage(context, e),
-            loading: (e) => _firstPage(context, e),
+            loaded: (e) => _firstPage(context, e, false),
+            loading: (e) => Stack(
+              children: [
+                _firstPage(context, e, true),
+                const DimmedLoadingIndicator(),
+              ],
+            ),
             orElse: () => Container(),
           );
         });
@@ -42,9 +49,10 @@ class HomePage extends HookWidget {
 
   final refreshController = RefreshController();
 
-  Widget _firstPage(BuildContext context, HomePageViewModel model) {
+  Widget _firstPage(
+      BuildContext context, HomePageViewModel model, bool loading) {
     return SmartRefresher(
-      controller: refreshController,
+      controller: loading ? RefreshController() : refreshController,
       onRefresh: () {
         _bloc.add(const HomePageEvent.load());
       },
@@ -170,7 +178,7 @@ class HomePage extends HookWidget {
 
   Widget _quickActions(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: $styles.insets.md),
+      padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: SpendingType.ALL.quickActions

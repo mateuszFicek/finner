@@ -6,9 +6,11 @@ import 'package:finner/utils/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import '../../../../common/widgets/custom_snack_bar.dart';
+import '../blocs/home_page_bloc/home_page_bloc.dart';
+
 class SpendingLimitSetterPage extends HookWidget {
-  final Function(double) onSet;
-  const SpendingLimitSetterPage({super.key, required this.onSet});
+  const SpendingLimitSetterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +83,15 @@ class SpendingLimitSetterPage extends HookWidget {
         SizedBox(height: $styles.insets.large),
         CustomButton(
             onTap: () {
-              onSet(double.parse(controller.text));
+              try {
+                getIt<HomePageBloc>()
+                    .add(HomePageEvent.setLimit(double.parse(controller.text)));
+                getIt<FinnerRouter>().pop();
+              } catch (e) {
+                CustomSnackBar.show(
+                    "Something went wrong. Check if values are valid.",
+                    context);
+              }
             },
             title: "Set limit"),
         SizedBox(height: $styles.insets.xl),

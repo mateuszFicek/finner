@@ -1,5 +1,6 @@
 import 'package:finner/common/extensions/extensions.dart';
 import 'package:finner/common/widgets/custom_button.dart';
+import 'package:finner/common/widgets/custom_snack_bar.dart';
 import 'package:finner/common/widgets/custom_text_field.dart';
 import 'package:finner/common/widgets/quick_action_button.dart';
 import 'package:finner/common/widgets/text_button.dart';
@@ -8,7 +9,6 @@ import 'package:finner/features/home/presentation/blocs/home_page_bloc/home_page
 import 'package:finner/styles/theme_utils.dart';
 import 'package:finner/utils/injectable.dart';
 import 'package:finner/utils/router.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -79,7 +79,7 @@ class AddSpendingPage extends HookWidget {
               SizedBox(height: $styles.insets.xs),
               _title("Amount"),
               SizedBox(height: $styles.insets.xs),
-              _limitInput(amountController),
+              _limitInput(amountController, true),
               SizedBox(height: $styles.insets.sm),
               _title("Title"),
               SizedBox(height: $styles.insets.xs),
@@ -95,14 +95,19 @@ class AddSpendingPage extends HookWidget {
         SizedBox(height: $styles.insets.md),
         CustomButton(
             onTap: () {
-              final s = Spending(
-                amount: double.parse(amountController.text),
-                date: date.value,
-                title: titleController.text,
-                type: type.name,
-              );
-
-              getIt<HomePageBloc>().add(HomePageEvent.addSpending(s));
+              try {
+                final s = Spending(
+                  amount: double.parse(amountController.text),
+                  date: date.value,
+                  title: titleController.text,
+                  type: type.name,
+                );
+                getIt<HomePageBloc>().add(HomePageEvent.addSpending(s));
+              } catch (e) {
+                CustomSnackBar.show(
+                    "Something went wrong. Check if values are valid.",
+                    context);
+              }
             },
             title: "Submit spending"),
         SizedBox(height: $styles.insets.xl),
@@ -143,12 +148,18 @@ class AddSpendingPage extends HookWidget {
     );
   }
 
-  Container _limitInput(TextEditingController controller) {
+  Container _limitInput(
+    TextEditingController controller, [
+    bool isNumberInput = false,
+  ]) {
     return Container(
       decoration: BoxDecoration(color: $styles.colors.white),
       child: CustomTextField(
         controller: controller,
         padded: false,
+        keyboardType: isNumberInput
+            ? const TextInputType.numberWithOptions(decimal: true)
+            : TextInputType.name,
       ),
     );
   }

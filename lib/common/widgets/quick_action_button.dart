@@ -32,8 +32,8 @@ class QuickActionButton extends StatelessWidget {
             SizedBox(height: $styles.insets.xxs),
             Text(
               quickAction.name,
-              maxLines: 2,
-              style: $styles.text.bodyExtraSmall,
+              maxLines: 1,
+              style: $styles.text.bodyExtraSmall.copyWith(fontSize: 11),
               textAlign: TextAlign.center,
             ),
           ],

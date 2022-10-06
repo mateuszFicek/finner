@@ -81,15 +81,8 @@ class UserInformation extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     if (spendingLimit == null) {
-                      getIt<FinnerRouter>().push(
-                        SpendingLimitSetterRoute(
-                          onSet: (value) {
-                            getIt<HomePageBloc>()
-                                .add(HomePageEvent.setLimit(value));
-                            getIt<FinnerRouter>().pop();
-                          },
-                        ),
-                      );
+                      getIt<FinnerRouter>()
+                          .push(const SpendingLimitSetterRoute());
                     }
                   },
                   child: Text(
