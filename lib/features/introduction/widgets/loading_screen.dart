@@ -1,4 +1,3 @@
-import 'package:finner/common/widgets/dimmed_loading_indicator.dart';
 import 'package:finner/styles/theme_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

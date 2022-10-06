@@ -1,10 +1,19 @@
+import 'package:finner/utils/injectable.dart';
+import 'package:finner/utils/router.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../styles/theme_utils.dart';
+import '../blocs/home_page_bloc/home_page_bloc.dart';
 
 class UserInformation extends StatelessWidget {
+  final User? user;
+  final double? spendingLimit;
+
   const UserInformation({
     Key? key,
+    this.user,
+    this.spendingLimit,
   }) : super(key: key);
 
   @override
@@ -17,6 +26,11 @@ class UserInformation extends StatelessWidget {
             CircleAvatar(
               radius: $styles.insets.md,
               backgroundColor: $styles.colors.accent1,
+              foregroundImage: user?.photoURL != null
+                  ? NetworkImage(
+                      user?.photoURL ?? "",
+                    )
+                  : null,
             ),
             SizedBox(width: $styles.insets.sm),
             Column(
@@ -29,7 +43,7 @@ class UserInformation extends StatelessWidget {
                       .copyWith(color: $styles.colors.white),
                 ),
                 Text(
-                  "Mateusz Ficek",
+                  user?.displayName ?? user?.email ?? "User",
                   style: $styles.text.h3.copyWith(color: $styles.colors.white),
                 ),
               ],
@@ -60,13 +74,29 @@ class UserInformation extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Spending limit",
+                  "Monthly spending limit",
                   style: $styles.text.contentFont
                       .copyWith(color: $styles.colors.white),
                 ),
-                Text(
-                  "PLN 400.00",
-                  style: $styles.text.h3.copyWith(color: $styles.colors.white),
+                GestureDetector(
+                  onTap: () {
+                    if (spendingLimit == null) {
+                      getIt<FinnerRouter>().push(
+                        SpendingLimitSetterRoute(
+                          onSet: (value) {
+                            getIt<HomePageBloc>()
+                                .add(HomePageEvent.setLimit(value));
+                            getIt<FinnerRouter>().pop();
+                          },
+                        ),
+                      );
+                    }
+                  },
+                  child: Text(
+                    spendingLimit?.toStringAsFixed(2) ?? "Set spending limit",
+                    style:
+                        $styles.text.h3.copyWith(color: $styles.colors.white),
+                  ),
                 ),
               ],
             ),

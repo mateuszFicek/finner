@@ -14,6 +14,8 @@ class AppColors {
 
   final Color redSpending = Colors.red.withOpacity(0.15);
   final Color blueSpending = Colors.blue.withOpacity(0.15);
+  final Color otherSpending = const Color(0xFF514F4D).withOpacity(0.15);
+
   final Color orangeSpending = Colors.orange.withOpacity(0.15);
   final Color greenSpending = Colors.green.withOpacity(0.15);
 

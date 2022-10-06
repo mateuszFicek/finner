@@ -9,12 +9,14 @@ class CustomTextButton extends StatelessWidget {
     this.outlined = false,
     this.padded = true,
     this.white = false,
+    this.centered = false,
     this.icon,
   });
 
   final Function() onTap;
   final String title;
   final bool outlined;
+  final bool centered;
   final bool padded;
   final bool white;
   final IconData? icon;
@@ -45,7 +47,8 @@ class CustomTextButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular($styles.corners.md)),
             child: Center(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment:
+                    centered ? MainAxisAlignment.center : MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(

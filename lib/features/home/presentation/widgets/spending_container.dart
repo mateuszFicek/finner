@@ -1,16 +1,14 @@
+import 'package:finner/common/extensions/date_extensions.dart';
+import 'package:finner/features/home/domain/entities/spending.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common/widgets/quick_action_button.dart';
 import '../../../../styles/theme_utils.dart';
 
 class SpendingContainer extends StatelessWidget {
-  final SpendingType? spendingType;
-  final String title;
-  final double amount;
+  final Spending spending;
   const SpendingContainer({
-    required this.amount,
-    required this.title,
-    this.spendingType,
+    required this.spending,
     Key? key,
   }) : super(key: key);
 
@@ -33,8 +31,7 @@ class SpendingContainer extends StatelessWidget {
             height: $styles.insets.xl,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: spendingType?.color ??
-                  $styles.colors.accent2.withOpacity(0.15),
+              color: spending.spendingType.color,
             ),
             child: Icon(
               Icons.wallet,
@@ -46,17 +43,29 @@ class SpendingContainer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
+                spending.title,
                 style: $styles.text.h4,
               ),
-              Text(
-                spendingType?.name ?? "Spending",
-                style: $styles.text.bodySmall.copyWith(height: 1),
+              Row(
+                children: [
+                  Text(
+                    spending.spendingType.name,
+                    style: $styles.text.bodySmall.copyWith(height: 1),
+                  ),
+                  Text(
+                    " - ",
+                    style: $styles.text.bodySmall.copyWith(height: 1),
+                  ),
+                  Text(
+                    spending.date.fullDateWithTime,
+                    style: $styles.text.bodySmall.copyWith(height: 1),
+                  ),
+                ],
               ),
             ],
           ),
           const Spacer(),
-          Text("PLN $amount")
+          Text(spending.amount.toStringAsFixed(2))
         ],
       ),
     );

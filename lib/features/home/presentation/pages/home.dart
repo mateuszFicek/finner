@@ -1,5 +1,6 @@
 import 'package:finner/features/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../styles/theme_utils.dart';
@@ -13,7 +14,15 @@ class HomeViewPage extends HookWidget {
     final currentPage = useState(0);
     return Scaffold(
       backgroundColor: $styles.colors.offWhite,
-      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        toolbarHeight: 0,
+        elevation: 0,
+        backgroundColor: Colors.black,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.dark,
+        ),
+      ),
       bottomNavigationBar: Container(
         height: $styles.insets.big,
         color: $styles.colors.greyBackground,
@@ -46,8 +55,9 @@ class HomeViewPage extends HookWidget {
       ),
       body: PageView(
         controller: pageController,
+        physics: NeverScrollableScrollPhysics(),
         children: [
-          const HomePage(),
+          HomePage(),
           ...List.generate(3, (index) => Center(child: Text(index.toString()))),
         ],
       ),

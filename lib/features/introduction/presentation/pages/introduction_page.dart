@@ -23,16 +23,22 @@ class _IntroductionPageState extends State<IntroductionPage> {
   void initState() {
     super.initState();
     Future.delayed($styles.times.med, () {
-      setState(() {
-        firstStepFinished = true;
-      });
+      if (mounted) {
+        setState(() {
+          firstStepFinished = true;
+        });
+      }
       Stream<int>.periodic($styles.times.slow, (x) => x)
           .take(featureAnimations.length)
           .forEach((element) {
-        setState(() {
-          featureAnimations[element] = true;
-        });
-      }).then((value) => setState(() => animationsFinished = true));
+        if (mounted) {
+          setState(() {
+            featureAnimations[element] = true;
+          });
+        }
+      }).then((value) {
+        if (mounted) setState(() => animationsFinished = true);
+      });
     });
   }
 
