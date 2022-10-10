@@ -9,6 +9,7 @@ abstract class HomeRepository {
   Future<Either<Failure, String>> getHome(int page);
 
   Future<Either<Failure, List<Spending>>> getCurrentWeekSpendings();
+  Future<Either<Failure, List<Spending>>> getCurrentMonthSpendings();
   Future<Either<Failure, double>> getCurrentMonthSpendingLimit();
   Future<Either<Failure, bool>> setMonthSpendingLimit(double limit);
   Future<Either<Failure, bool>> addSpending(Spending spending);

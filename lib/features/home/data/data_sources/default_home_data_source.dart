@@ -47,6 +47,20 @@ class DefaultHomeDataSource implements HomeDataSource {
   }
 
   @override
+  Future<Either<Failure, List<Spending>>> getCurrentMonthSpendings() async {
+    final cUser = auth.currentUser;
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    final snapshot = await users.doc(cUser!.uid).collection("spendings").get();
+    var spendings =
+        snapshot.docs.map((e) => Spending.fromJson(e.data())).toList();
+    var firstDay = firstDayOfCurrentMonth();
+    var lastDay = lastDayOfMonth();
+    final s = spendings.where((element) =>
+        element.date.isAfter(firstDay) && element.date.isBefore(lastDay));
+    return right(s.toList());
+  }
+
+  @override
   Future<Either<Failure, double>> getCurrentMonthSpendingLimit() async {
     final cUser = auth.currentUser;
     CollectionReference users = FirebaseFirestore.instance.collection('users');
@@ -101,4 +115,16 @@ DateTime mostRecentMonday(DateTime date) =>
 DateTime nextSunday(DateTime date) {
   if (date.weekday == 7) return DateTime(date.year, date.month, date.day);
   return DateTime(date.year, date.month, date.day - date.weekday % 7 + 7);
+}
+
+DateTime firstDayOfCurrentMonth() {
+  final now = DateTime.now();
+  var date = DateTime(now.year, now.month, 1).toString();
+  return DateTime.parse(date);
+}
+
+DateTime lastDayOfMonth() {
+  final now = DateTime.now();
+
+  return DateTime(now.year, now.month + 1, 1);
 }

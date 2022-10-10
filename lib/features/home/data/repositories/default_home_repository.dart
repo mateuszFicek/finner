@@ -23,6 +23,10 @@ class DefaultHomeRepository implements HomeRepository {
       _dataSource.getCurrentWeekSpendings();
 
   @override
+  Future<Either<Failure, List<Spending>>> getCurrentMonthSpendings() =>
+      _dataSource.getCurrentMonthSpendings();
+
+  @override
   Future<Either<Failure, double>> getCurrentMonthSpendingLimit() =>
       _dataSource.getCurrentMonthSpendingLimit();
 

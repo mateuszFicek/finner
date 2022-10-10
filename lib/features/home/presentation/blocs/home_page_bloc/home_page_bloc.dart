@@ -11,6 +11,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../account/domain/use_cases/check_user_status.dart';
+import '../../../domain/use_cases/get_current_month_spendings.dart';
 
 part 'home_page_event.dart';
 part 'home_page_state.dart';
@@ -20,6 +21,7 @@ part 'home_page_bloc.freezed.dart';
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   final CheckUserStatus _checkUserStatus;
   final GetCurrentWeekSpendings _getCurrentWeekSpendings;
+  final GetCurrentMonthSpendings _getCurrentMonthSpendings;
   final GetCurrentMonthSpendingLimit _getCurrentMonthSpendingLimit;
   final SetMonthSpendingLimit _setMonthLimit;
   final AddSpending _addSpending;
@@ -29,6 +31,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   HomePageBloc(
     this._checkUserStatus,
     this._getCurrentWeekSpendings,
+    this._getCurrentMonthSpendings,
     this._getCurrentMonthSpendingLimit,
     this._setMonthLimit,
     this._addSpending,
@@ -36,17 +39,29 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     on<HomePageEvent>((event, emit) async {
       if (event is _Load) {
         emit(_Loading(_model));
-        final u = await _checkUserStatus();
-        u.fold((l) => null, (r) => _model = _model.copyWith(user: r));
+        final userResponse = await _checkUserStatus();
+        userResponse.fold(
+            (l) => null, (r) => _model = _model.copyWith(user: r));
 
-        final x = await _getCurrentWeekSpendings();
-        final l = await _getCurrentMonthSpendingLimit();
+        final monthSpendingResponse = await _getCurrentMonthSpendings();
+        double spentAmount = 0.0;
+        monthSpendingResponse.fold((l) => null, (r) {
+          spentAmount = r.fold(
+            0.0,
+            (previousValue, element) =>
+                previousValue += element.amount.toDouble(),
+          );
+        });
 
-        x.fold((l) => null, (r) {
+        final currentWeekSpendingResponse = await _getCurrentWeekSpendings();
+        currentWeekSpendingResponse.fold((l) => null, (r) {
           r.sort(((b, a) => a.date.compareTo(b.date)));
           _model = _model.copyWith(weekSpendings: r);
         });
-        l.fold((e) => null, (r) => _model = _model.copyWith(limit: r));
+
+        final spendingLimitResponse = await _getCurrentMonthSpendingLimit();
+        spendingLimitResponse.fold((e) => null,
+            (r) => _model = _model.copyWith(limit: r - spentAmount));
         emit(_Loaded(_model));
       }
 

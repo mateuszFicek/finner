@@ -74,7 +74,7 @@ class UserInformation extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Monthly spending limit",
+                  "Monthly spending limit (amount left)",
                   style: $styles.text.contentFont
                       .copyWith(color: $styles.colors.white),
                 ),
