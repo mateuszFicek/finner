@@ -59,6 +59,8 @@ class AddSpendingPage extends HookWidget {
   Widget _body(BuildContext context) {
     final amountController = useTextEditingController();
     final titleController = useTextEditingController();
+    final spendingType = useState(type);
+
     var date = useState(DateTime.now());
 
     return ListView(
@@ -73,7 +75,7 @@ class AddSpendingPage extends HookWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _icon(context),
+              _icon(context, spendingType),
               SizedBox(height: $styles.insets.md),
               _pageDescription(),
               SizedBox(height: $styles.insets.xs),
@@ -96,11 +98,12 @@ class AddSpendingPage extends HookWidget {
         CustomButton(
             onTap: () {
               try {
+                final doubleAmount = amountController.text.replaceAll(",", ".");
                 final s = Spending(
-                  amount: double.parse(amountController.text),
+                  amount: double.parse(doubleAmount),
                   date: date.value,
                   title: titleController.text,
-                  type: type.name,
+                  type: spendingType.value.name,
                 );
                 getIt<HomePageBloc>().add(HomePageEvent.addSpending(s));
               } catch (e) {
@@ -115,19 +118,57 @@ class AddSpendingPage extends HookWidget {
     );
   }
 
-  Center _icon(BuildContext context) {
+  Center _icon(BuildContext context, ValueNotifier<SpendingType> type) {
     return Center(
-      child: Container(
-        height: MediaQuery.of(context).size.height / 6,
-        padding: EdgeInsets.all($styles.insets.md),
-        decoration: BoxDecoration(
-          color: type.color,
-          shape: BoxShape.circle,
-        ),
-        child: Icon(
-          type.icon,
-          size: $styles.insets.xxl,
-          color: $styles.colors.black,
+      child: GestureDetector(
+        onTap: () {
+          showModalBottomSheet(
+            backgroundColor: $styles.colors.greyBackground,
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height / 4 +
+                  MediaQuery.of(context).padding.bottom +
+                  $styles.insets.xxl,
+            ),
+            context: context,
+            builder: (context) => ListView(
+              padding: EdgeInsets.only(top: $styles.insets.sm),
+              children: SpendingType.values
+                  .map(
+                    (e) => GestureDetector(
+                      onTap: () {
+                        type.value = e;
+                        getIt<FinnerRouter>().pop();
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: $styles.insets.xs,
+                            horizontal: $styles.insets.md),
+                        child: Row(
+                          children: [
+                            Icon(e.icon),
+                            SizedBox(width: $styles.insets.md),
+                            Text(e.name),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          );
+        },
+        child: Container(
+          height: MediaQuery.of(context).size.height / 6,
+          padding: EdgeInsets.all($styles.insets.md),
+          decoration: BoxDecoration(
+            color: type.value.color,
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            type.value.icon,
+            size: $styles.insets.xxl,
+            color: $styles.colors.black,
+          ),
         ),
       ),
     );

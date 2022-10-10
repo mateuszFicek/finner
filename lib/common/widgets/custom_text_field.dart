@@ -9,12 +9,14 @@ class CustomTextField extends StatelessWidget {
     this.hidden = false,
     this.hint = "",
     this.padded = true,
+    this.border = true,
     this.keyboardType = TextInputType.text,
   }) : super(key: key);
 
   final String hint;
   final bool hidden;
   final bool padded;
+  final bool border;
   final TextEditingController controller;
   final TextInputType keyboardType;
   @override
@@ -27,8 +29,14 @@ class CustomTextField extends StatelessWidget {
         keyboardType: keyboardType,
         decoration: InputDecoration(
           hintText: hint,
-          border: const OutlineInputBorder(),
-          enabledBorder: const OutlineInputBorder(),
+          border: OutlineInputBorder(
+              borderSide: BorderSide(
+            color: border ? $styles.colors.black : Colors.transparent,
+          )),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+            color: border ? $styles.colors.black : Colors.transparent,
+          )),
         ),
       ),
     );
