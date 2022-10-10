@@ -157,18 +157,45 @@ class AddSpendingPage extends HookWidget {
             ),
           );
         },
-        child: Container(
-          height: MediaQuery.of(context).size.height / 6,
-          padding: EdgeInsets.all($styles.insets.md),
-          decoration: BoxDecoration(
-            color: type.value.color,
-            shape: BoxShape.circle,
-          ),
-          child: Icon(
-            type.value.icon,
-            size: $styles.insets.xxl,
-            color: $styles.colors.black,
-          ),
+        child: Stack(
+          children: [
+            Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height / 6,
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height / 12,
+                  left: MediaQuery.of(context).size.height / 12,
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: $styles.colors.black,
+                    shape: BoxShape.circle,
+                  ),
+                  padding: EdgeInsets.all($styles.insets.xs),
+                  child: Icon(
+                    Icons.edit,
+                    size: $styles.insets.sm,
+                    color: $styles.colors.white,
+                  ),
+                ),
+              ),
+            ),
+            Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height / 6,
+                padding: EdgeInsets.all($styles.insets.md),
+                decoration: BoxDecoration(
+                  color: type.value.color,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  type.value.icon,
+                  size: $styles.insets.xxl,
+                  color: $styles.colors.black,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
